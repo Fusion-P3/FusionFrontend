@@ -1,0 +1,32 @@
+name: Build
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: install angular
+        run: npm install -g @angular/cli
+      - name: install dependencies
+        run: npm install --legacy-peer-deps
+      - name: test
+        run: ng test --no-watch --code-coverage
+      - uses: SonarSource/sonarqube-scan-action@v1.1.0
+        env: 
+          SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_HOST_URL : https://sonarcloud.io
+        with:
+        # Additional arguments to the sonar-scanner
+          args: >
+                -Dsonar.javascript.lcov.reportPaths=./coverage/e-commerce/lcov.info
+          # Set the sonar.projectBaseDir analysis property
+          projectBaseDir: ./
