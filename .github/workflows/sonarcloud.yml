@@ -20,4 +20,4 @@ jobs:
       - name: test
         run: ng test --no-watch --code-coverage --browsers=ChromeHeadless
       - name: Run Sonarqube
-        run: sonar-scanner /d:sonar.login="${{ secrets.SONAR_TOKEN }}" -Dsonar.javascript.lcov.reportPaths=./coverage/fusion/lcov.info -Dsonar.organization=fusion-p3 -Dsonar.projectKey=Fusion-P3_FusionFrontend -Dsonar.sources=src -Dsonar.host.url=https://sonarcloud.io
+        run: sonar-scanner -Dsonar.login="${{ secrets.SONAR_TOKEN }}" -Dsonar.javascript.lcov.reportPaths=./coverage/fusion/lcov.info -Dsonar.organization=fusion-p3 -Dsonar.projectKey=Fusion-P3_FusionFrontend -Dsonar.sources=src -Dsonar.host.url=https://sonarcloud.io
