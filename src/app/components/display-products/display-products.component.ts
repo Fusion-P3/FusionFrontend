@@ -14,11 +14,10 @@ export class DisplayProductsComponent implements OnInit {
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe({
-      next: (resp) => this.allProducts = resp,
-      error: (err) => console.log(err),
-      complete: () => console.log("Products Retrieved")
-    });
+    // this.productService.getProducts().subscribe({
+    //   next: (resp) => this.allProducts = resp,
+    //   error: (err) => console.log(err),
+    //   complete: () => console.log("Products Retrieved")
+    // });
   }
-
 }
