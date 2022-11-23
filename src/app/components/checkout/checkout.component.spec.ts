@@ -1,4 +1,7 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 import { CheckoutComponent } from './checkout.component';
 
@@ -8,9 +11,10 @@ describe('CheckoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CheckoutComponent ]
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [CheckoutComponent, NavbarComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -1,4 +1,7 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 import { DisplayProductsComponent } from './display-products.component';
 
@@ -8,9 +11,10 @@ describe('DisplayProductsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DisplayProductsComponent ]
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [DisplayProductsComponent, NavbarComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
