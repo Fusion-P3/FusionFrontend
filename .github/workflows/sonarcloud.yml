@@ -14,19 +14,10 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: install angular
-        run: npm install -g @angular/cli
+        run: npm install -g @angular/cli && npm install -g sonarqube-scanner
       - name: install dependencies
-        run: npm install --legacy-peer-deps
+        run: npm install 
       - name: test
         run: ng test --no-watch --code-coverage --browsers=ChromeHeadless
-      - uses: SonarSource/sonarqube-scan-action@v1.1.0
-        env: 
-          SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_HOST_URL : https://sonarcloud.io
-        with:
-        # Additional arguments to the sonar-scanner
-          args: >
-                -Dsonar.javascript.lcov.reportPaths=./coverage/e-commerce/lcov.info
-          # Set the sonar.projectBaseDir analysis property
-          projectBaseDir: ./
+      - name: Run Sonarqube
+        run: sonar-scanner /d:sonar.login="${{ secrets.SONAR_TOKEN }}" -Dsonar.javascript.lcov.reportPaths=./coverage/fusion/lcov.info -Dsonar.organization=fusion-p3 -Dsonar.projectKey=Fusion-P3_FusionFrontend -Dsonar.sources=src -Dsonar.host.url=https://sonarcloud.io
