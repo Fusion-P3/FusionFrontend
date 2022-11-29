@@ -43,11 +43,10 @@ export class ProductCardComponent implements OnInit {
         };
         this.productService.setCart(cart);
         inCart = true;
-        return;
       }
     });
 
-    if (inCart == false) {
+    if (!inCart) {
       let newProduct = {
         product: product,
         quantity: this.quantitySelect,
