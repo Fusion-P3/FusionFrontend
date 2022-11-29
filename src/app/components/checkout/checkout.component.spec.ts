@@ -30,5 +30,5 @@ describe('CheckoutComponent', () => {
   it('should submit', () => {
     component.onSubmit();
     expect(component).toBeTruthy();
-  })
+  });
 });
