@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { userDTO } from '../components/login/login.component';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,15 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(email: string, password: string): Observable<any> {
-    const payload = {email:email, password:password};
-    return this.http.post<any>(`${this.authUrl}/login`, payload, {headers: environment.headers, withCredentials: environment.withCredentials});
-  }
+login(user: userDTO): Observable<userDTO>{
+  return this.http.post<userDTO>(`${this.authUrl}/login`, user);
+}
+
+  // Richard's login
+  // login(email: string, password: string): Observable<any> {
+  //   const payload = {email:email, password:password};
+  //   return this.http.post<any>(`${this.authUrl}/login`, payload, {headers: environment.headers, withCredentials: environment.withCredentials});
+  // }
 
   logout(): void{
     this.http.post(`${this.authUrl}/logout`, null);

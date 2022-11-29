@@ -11,28 +11,38 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm = new UntypedFormGroup({
-    email: new UntypedFormControl(''),
+    username: new UntypedFormControl(''),
     password: new UntypedFormControl('')
   })
   
-
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
   
-  onSubmit(): void {
-    this.authService.login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value).subscribe(
-      () => {
-        this.authService.loggedIn=true;
-      },
-      (err) => console.log(err),
-      () => this.router.navigate(['home'])
-    );
+onSubmit(): void {
+  let user: userDTO = {
+    username: this.loginForm.get('username')?.value,
+    password: this.loginForm.get('password')?.value
   }
+this.authService.login(user).subscribe(
+  {
+    next:(response) => {
+    this.authService.loggedIn=true;},
+    error:(err) => {console.log(err);},
+    complete: () => {this.router.navigate(['home']);}
+  }
+);
+
+}
 
   register(): void {
     this.router.navigate(['register']);
   }
 
+}
+
+export interface userDTO {
+  username: string;
+  password: string;
 }
