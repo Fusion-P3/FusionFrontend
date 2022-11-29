@@ -4,6 +4,7 @@ import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { CheckoutDto, CheckoutService } from 'src/app/services/checkout.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-checkout',
@@ -33,10 +34,10 @@ export class CheckoutComponent implements OnInit {
     country: new UntypedFormControl('', Validators.required)
   });
 
-  constructor(private productService: ProductService, private router: Router, private checkoutService: CheckoutService) { }
+  constructor(private productService: ProductService, private router: Router, private checkoutService: CheckoutService, private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.productService.getCart().subscribe(
+    this.productService.getCart(this.auth.userId).subscribe(
       (cart) => {
         this.products = cart.products;
         this.products.forEach(
@@ -48,9 +49,8 @@ export class CheckoutComponent implements OnInit {
   }
 
   onSubmit(): void {
-    //  This is hardwired for user Duncan! When we get having a logged in user pass a better user id
     let checkoutDto: CheckoutDto = {
-      user_id: "0df56b6a-26dd-47fe-81a2-e8297afd41be"
+      user_id: this.auth.userId
     }
     this.checkoutService.checkout(checkoutDto).subscribe({
       next: (res) => {
