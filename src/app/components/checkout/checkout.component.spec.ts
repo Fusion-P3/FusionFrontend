@@ -26,4 +26,9 @@ describe('CheckoutComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should submit', () => {
+    component.onSubmit();
+    expect(component).toBeTruthy();
+  })
 });
