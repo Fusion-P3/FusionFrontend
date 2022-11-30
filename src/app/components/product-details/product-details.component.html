@@ -5,7 +5,7 @@
         <img class="product-image" [src]="product.image" alt="Product Image">
     </div>
     <div class="description">
-        <p>{{product.description}}</p>
+        <p>{{fullDescription}}</p>
     </div>
     <div class="input-group input-group-sm mb-3 w-25">
         <div class="input-group-prepend">
@@ -22,6 +22,7 @@
             aria-describedby="inputGroup-sizing-sm" disabled>
     </div>
     <div class="card-body">
-        <button class="btn btn-outline-success">Add to Cart</button>
+        <input type="number" class="mr-3"[(ngModel)]="quantitySelect" />
+        <button class="btn btn-outline-success" (click)="addToCart(product)">Add to Cart</button>
     </div>
 </div>
