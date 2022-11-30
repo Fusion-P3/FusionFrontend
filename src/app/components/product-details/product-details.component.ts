@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { AuthService } from 'src/app/services/auth.service';
@@ -30,7 +30,8 @@ export class ProductDetailsComponent implements OnInit {
     private productService: ProductService,
     private wikiService: WikiService,
     private cdr: ChangeDetectorRef,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -64,7 +65,12 @@ export class ProductDetailsComponent implements OnInit {
             totalPrice: this.totalPrice + product.price * this.quantitySelect,
           }
         };
-        this.productService.setCart(cart);
+        this.subscription = this.productService.setCart(cart).subscribe((cart) => {
+          this.cartCount = cart.cart.cartCount;
+          this.products = cart.cart.products;
+          this.totalPrice = cart.cart.totalPrice;
+          this.router.navigate(['cart']);
+        });
         inCart = true;
       }
     });
@@ -83,7 +89,12 @@ export class ProductDetailsComponent implements OnInit {
           totalPrice: this.totalPrice + product.price * this.quantitySelect,
         }
       };
-      this.productService.setCart(cart);
+      this.subscription = this.productService.setCart(cart).subscribe((cart) => {
+        this.cartCount = cart.cart.cartCount;
+        this.products = cart.cart.products;
+        this.totalPrice = cart.cart.totalPrice;
+        this.router.navigate(['cart']);
+      });
     }
   }
 }
