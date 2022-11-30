@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Product } from 'src/app/models/product';
-import { ProductService } from 'src/app/services/product.service';
+import { Cart, CartDto, ProductService } from 'src/app/services/product.service';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 
@@ -23,62 +23,79 @@ describe('ProductDetailsComponent', () => {
     type: '',
     title: 'Hydrogen',
     displaytitle: '',
-  namespace: {
+    namespace: {
       id: 0,
       text: '',
-  },
-  wikibase_item: '',
-  titles: {
+    },
+    wikibase_item: '',
+    titles: {
       canonical: '',
       normalized: '',
       display: '',
-  },
-  pageid: 0,
-  thumbnail: {
+    },
+    pageid: 0,
+    thumbnail: {
       source: '',
       width: 0,
       height: 0,
-  },
-  originalimage: {
+    },
+    originalimage: {
       source: '',
       width: 0,
       height: 0,
-  },
-  lang: '',
-  dir: '',
-  revision: '',
-  tid: '',
-  timestamp: '',
-  description: '',
-  description_source: '',
-  content_urls: {
+    },
+    lang: '',
+    dir: '',
+    revision: '',
+    tid: '',
+    timestamp: '',
+    description: '',
+    description_source: '',
+    content_urls: {
       desktop: {
-          page: '',
-          revisions: '',
-          edit: '',
-          talk: '',
+        page: '',
+        revisions: '',
+        edit: '',
+        talk: '',
       },
       mobile: {
-          page: '',
-          revisions: '',
-          edit: '',
-          talk: '',
+        page: '',
+        revisions: '',
+        edit: '',
+        talk: '',
       }
-  },
-  extract: 'hello',
-  extract_html: '',
+    },
+    extract: 'hello',
+    extract_html: '',
   }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProductDetailsComponent, NavbarComponent ],
-      imports: [ RouterTestingModule, HttpClientTestingModule, FormsModule ]
+      declarations: [ProductDetailsComponent, NavbarComponent],
+      imports: [RouterTestingModule, HttpClientTestingModule, FormsModule]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ProductDetailsComponent);
     productService = TestBed.inject(ProductService);
     wikiService = TestBed.inject(WikiService);
+
+    let cart: Cart = {
+      cartCount: 0,
+      products: [],
+      totalPrice: 0
+    };
+    spyOn(productService, 'getCart').and.returnValue(new Observable<Cart>(observer => {
+      observer.next(cart);
+      observer.complete();
+    }));
+    spyOn(productService, 'setCart').and.callFake((dto) => {
+      return new Observable<CartDto>(o => {
+        o.next(dto);
+        o.complete();
+      });
+    });
+
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -89,14 +106,14 @@ describe('ProductDetailsComponent', () => {
 
   it('should display the current product with wiki description', () => {
     spyOn(productService, 'getSingleProduct').and.returnValue(
-      new Observable( observer => {
+      new Observable(observer => {
         observer.next(testProd);
         observer.complete();
       })
     );
 
     spyOn(wikiService, 'getSummary').and.returnValue(
-      new Observable (o => {
+      new Observable(o => {
         o.next(wikiResponse);
       })
     );
@@ -105,15 +122,24 @@ describe('ProductDetailsComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
+
+
     expect(component.product).toEqual(testProd);
     expect(component.fullDescription).toEqual("hello");
   });
 
   it('addToCart() should update the cart', () => {
-
-    component.addToCart(testProd);
-    expect(component.cartCount).toEqual(1);
-    component.addToCart(testProd);
-    expect(component.cartCount).toEqual(1);
+    expect(component).toBeTruthy();
+    let product: Product = {
+      id: 0,
+      name: 'test',
+      quantity: 1,
+      price: 0,
+      description: '',
+      image: ''
+    }
+    component.addToCart(product);
+    component.addToCart(product);
+    expect(component).toBeTruthy();
   })
 });
