@@ -1,15 +1,17 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Observable } from 'rxjs';
 import { Product } from 'src/app/models/product';
-import { ProductService } from 'src/app/services/product.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Cart, CartDto, ProductService } from 'src/app/services/product.service';
 
 import { ProductCardComponent } from './product-card.component';
 
 describe('ProductCardComponent', () => {
   let component: ProductCardComponent;
   let fixture: ComponentFixture<ProductCardComponent>;
-  let service: ProductService;
-  let testProd = new Product(1, 'test', 10, 'test', 1, 'test');
+  let pservice: ProductService;
+  let aservice: AuthService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -20,12 +22,41 @@ describe('ProductCardComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductCardComponent);
-    service = TestBed.inject(ProductService);
+    pservice = TestBed.inject(ProductService);
+    aservice = TestBed.inject(AuthService);
+
+    //spyOnProperty(aservice, 'userId', 'get').and.returnValue('0');
+    let cart: Cart = {
+      cartCount: 0,
+      products: [],
+      totalPrice: 0
+    };
+    spyOn(pservice, 'getCart').and.returnValue(new Observable<Cart>(observer => {
+      observer.next(cart);
+      observer.complete();
+    }));
+    spyOn(pservice, 'setCart').and.callFake((dto) => {
+      return new Observable<CartDto>(o => {
+        o.next(dto);
+        o.complete();
+      });
+    });
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
+    expect(component).toBeTruthy();
+    let product: Product = {
+      id: 0,
+      name: 'test',
+      quantity: 1,
+      price: 0,
+      description: '',
+      image: ''
+    }
+    component.addToCart(product);
+    component.addToCart(product);
     expect(component).toBeTruthy();
   });
 });
