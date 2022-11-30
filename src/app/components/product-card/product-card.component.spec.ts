@@ -28,16 +28,4 @@ describe('ProductCardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should update cart when product/quantity is added', () => {
-    component.addToCart(testProd);
-    expect(component.cartCount == 1);
-    component.addToCart(testProd);
-    expect(component.cartCount == 1);
-    service.getCart().subscribe((cart) => {
-      expect(cart.cartCount == 1);
-      expect(cart.products[0].quantity == 2);
-      expect(cart.products[0].product == testProd);
-    });
-  });
 });
