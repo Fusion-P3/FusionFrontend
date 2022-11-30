@@ -41,7 +41,15 @@ export class CartComponent implements OnInit {
         totalPrice: 0.00
       }
     };
-    this.productService.setCart(cart);
+    this.productService.setCart(cart).subscribe(
+      (cart) => {
+        this.products = cart.cart.products;
+        this.products.forEach(
+          (element) => this.cartProducts.push(element.product)
+        );
+        this.totalPrice = cart.cart.totalPrice;
+      }
+    );
     this.router.navigate(['/home']);
   }
 

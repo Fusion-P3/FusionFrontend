@@ -20,13 +20,14 @@ interface Cart {
 export class ProductService {
 
   private productUrl: string = "/api/product";
+  private cartUrl: string = environment.baseUrl + '/api/cart'
 
   getCart(userId: string): Observable<Cart> {
-    return this.http.get<Cart>(this.productUrl + '/cart/' + userId);
+    return this.http.get<Cart>(this.cartUrl + '/' + userId);
   }
 
   setCart(cart: CartDto): Observable<CartDto> {
-    return this.http.put<CartDto>(this.productUrl + '/cart', cart);
+    return this.http.put<CartDto>(this.cartUrl, cart);
   }
 
   constructor(private http: HttpClient) { }

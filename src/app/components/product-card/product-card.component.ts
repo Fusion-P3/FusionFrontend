@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
-import { ProductService } from 'src/app/services/product.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { CartDto, ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product-card',
@@ -20,10 +21,10 @@ export class ProductCardComponent implements OnInit {
 
   @Input() productInfo!: Product;
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.subscription = this.productService.getCart().subscribe((cart) => {
+    this.subscription = this.productService.getCart(this.auth.userId).subscribe((cart) => {
       this.cartCount = cart.cartCount;
       this.products = cart.products;
       this.totalPrice = cart.totalPrice;
@@ -36,12 +37,19 @@ export class ProductCardComponent implements OnInit {
     this.products.forEach((element) => {
       if (element.product.name == product.name) {
         element.quantity += this.quantitySelect;
-        let cart = {
-          cartCount: this.cartCount,
-          products: this.products,
-          totalPrice: this.totalPrice + product.price,
+        let cart: CartDto = {
+          userId: this.auth.userId,
+          cart: {
+            cartCount: this.cartCount,
+            products: this.products,
+            totalPrice: this.totalPrice + product.price,
+          }
         };
-        this.productService.setCart(cart);
+        this.subscription = this.productService.setCart(cart).subscribe((cart) => {
+          this.cartCount = cart.cart.cartCount;
+          this.products = cart.cart.products;
+          this.totalPrice = cart.cart.totalPrice;
+        });
         inCart = true;
       }
     });
@@ -52,12 +60,19 @@ export class ProductCardComponent implements OnInit {
         quantity: this.quantitySelect,
       };
       this.products.push(newProduct);
-      let cart = {
-        cartCount: this.cartCount + 1,
-        products: this.products,
-        totalPrice: this.totalPrice + product.price,
+      let cart: CartDto = {
+        userId: this.auth.userId,
+        cart: {
+          cartCount: this.cartCount + 1,
+          products: [newProduct],
+          totalPrice: this.totalPrice + product.price,
+        }
       };
-      this.productService.setCart(cart);
+      this.subscription = this.productService.setCart(cart).subscribe((cart) => {
+        this.cartCount = cart.cart.cartCount;
+        this.products = cart.cart.products;
+        this.totalPrice = cart.cart.totalPrice;
+      });
     }
   }
 
