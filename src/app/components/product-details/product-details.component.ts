@@ -3,16 +3,15 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { AuthService } from 'src/app/services/auth.service';
-import { CartDto, ProductService } from 'src/app/services/product.service'
+import { CartDto, ProductService } from 'src/app/services/product.service';
 import { WikiService } from 'src/app/services/wiki.service';
 
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.scss']
+  styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
-
   public product: Product = new Product(0, 'TEST', 0, '', 0, '');
   fullDescription: string = '';
   cartCount!: number;
@@ -26,17 +25,23 @@ export class ProductDetailsComponent implements OnInit {
 
   @Input() productInfo!: Product;
 
-  constructor(private route: ActivatedRoute, private productService: ProductService, private wikiService: WikiService, private cdr: ChangeDetectorRef, private auth: AuthService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private productService: ProductService,
+    private wikiService: WikiService,
+    private cdr: ChangeDetectorRef,
+    private auth: AuthService
+  ) { }
 
   ngOnInit(): void {
-    let productname = this.route.snapshot.paramMap.get('productname')!
+    let productname = this.route.snapshot.paramMap.get('productname')!;
     this.productService.getSingleProduct(productname).subscribe({
       next: (res) => {
         this.product = res;
         this.wikiService.getSummary(productname).subscribe({
-          next: res => this.fullDescription = res.extract
+          next: (res) => (this.fullDescription = res.extract),
         });
-      }
+      },
     });
     this.subscription = this.productService.getCart(this.auth.userId).subscribe((cart) => {
       this.cartCount = cart.cartCount;
@@ -56,7 +61,7 @@ export class ProductDetailsComponent implements OnInit {
           cart: {
             cartCount: this.cartCount,
             products: this.products,
-            totalPrice: this.totalPrice + product.price
+            totalPrice: this.totalPrice + product.price * this.quantitySelect,
           }
         };
         this.productService.setCart(cart);
@@ -75,12 +80,10 @@ export class ProductDetailsComponent implements OnInit {
         cart: {
           cartCount: this.cartCount,
           products: this.products,
-          totalPrice: this.totalPrice + product.price
+          totalPrice: this.totalPrice + product.price * this.quantitySelect,
         }
       };
       this.productService.setCart(cart);
     }
   }
-
 }
-
