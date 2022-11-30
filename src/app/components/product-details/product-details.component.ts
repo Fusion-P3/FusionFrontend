@@ -2,17 +2,16 @@ import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
-import { ProductService } from 'src/app/services/product.service'
+import { ProductService } from 'src/app/services/product.service';
 import { WikiService } from 'src/app/services/wiki.service';
 
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.scss']
+  styleUrls: ['./product-details.component.scss'],
 })
-export class ProductDetailsComponent implements OnInit{
-
-  public product: Product = new Product(0,'TEST',0,'',0,'');
+export class ProductDetailsComponent implements OnInit {
+  public product: Product = new Product(0, 'TEST', 0, '', 0, '');
   fullDescription: string = '';
   cartCount!: number;
   products: {
@@ -25,17 +24,22 @@ export class ProductDetailsComponent implements OnInit{
 
   @Input() productInfo!: Product;
 
-  constructor(private route: ActivatedRoute, private productService: ProductService, private wikiService: WikiService, private cdr: ChangeDetectorRef) { }
+  constructor(
+    private route: ActivatedRoute,
+    private productService: ProductService,
+    private wikiService: WikiService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
-    let productname = this.route.snapshot.paramMap.get('productname')!
+    let productname = this.route.snapshot.paramMap.get('productname')!;
     this.productService.getSingleProduct(productname).subscribe({
       next: (res) => {
         this.product = res;
         this.wikiService.getSummary(productname).subscribe({
-          next: res => this.fullDescription = res.extract
+          next: (res) => (this.fullDescription = res.extract),
         });
-      }
+      },
     });
     this.subscription = this.productService.getCart().subscribe((cart) => {
       this.cartCount = cart.cartCount;
@@ -43,7 +47,7 @@ export class ProductDetailsComponent implements OnInit{
       this.totalPrice = cart.totalPrice;
     });
   }
-  
+
   addToCart(product: Product): void {
     let inCart = false;
 
@@ -53,7 +57,7 @@ export class ProductDetailsComponent implements OnInit{
         let cart = {
           cartCount: this.cartCount,
           products: this.products,
-          totalPrice: this.totalPrice + product.price,
+          totalPrice: this.totalPrice + product.price * this.quantitySelect,
         };
         this.productService.setCart(cart);
         inCart = true;
@@ -69,11 +73,9 @@ export class ProductDetailsComponent implements OnInit{
       let cart = {
         cartCount: this.cartCount + 1,
         products: this.products,
-        totalPrice: this.totalPrice + product.price,
+        totalPrice: this.totalPrice + product.price * this.quantitySelect,
       };
       this.productService.setCart(cart);
     }
   }
-
 }
-
