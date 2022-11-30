@@ -4,11 +4,12 @@ import { LoginComponent } from './login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from 'src/app/services/auth.service';
+import { from, Observable, of } from 'rxjs';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-  let service: AuthService;
+  let authService: AuthService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -24,7 +25,7 @@ describe('LoginComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
-    service = TestBed.inject(AuthService);
+    authService = TestBed.inject(AuthService);
     fixture.detectChanges();
   });
 
@@ -32,12 +33,30 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should submit completed form and set loggedIn to true', () => {
-    component.loginForm.setValue({
+  it('should update loggedIn', () => {
+    let mockedRes: userDTO = {
       username: 'test',
       password: 'test',
-    });
+    };
+
+    spyOn(authService, 'login').and.returnValue(
+      new Observable<userDTO>((o) => {
+        o.next(mockedRes);
+      })
+    );
+
+    fixture = TestBed.createComponent(LoginComponent);
+    component = fixture.componentInstance;
+
+    component.loginForm.controls['username'].setValue('test');
+    component.loginForm.controls['password'].setValue('test');
     component.onSubmit();
-    expect(service.loggedIn);
+
+    fixture.detectChanges();
+    expect(authService.loggedIn).toBeTrue();
   });
 });
+export interface userDTO {
+  username: string;
+  password: string;
+}
