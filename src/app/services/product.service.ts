@@ -42,8 +42,8 @@ export class ProductService {
     return this.http.get<Product[]>(environment.baseUrl+this.productUrl, {headers: environment.headers, withCredentials: environment.withCredentials});
   }
 
-  public getSingleProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(environment.baseUrl+id);
+  public getSingleProduct(name: string): Observable<Product> {
+    return this.http.get<Product>(environment.baseUrl+this.productUrl+'/' + name);
   }
 
   public purchase(products: {id:number, quantity:number}[]): Observable<any> {
