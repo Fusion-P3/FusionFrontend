@@ -32,7 +32,7 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should submit completed form', () => {
+  it('should submit completed form and set loggedIn to true', () => {
     component.loginForm.setValue({
       username: 'test',
       password: 'test',
