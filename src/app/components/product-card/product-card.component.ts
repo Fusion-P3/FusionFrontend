@@ -39,7 +39,7 @@ export class ProductCardComponent implements OnInit {
         let cart = {
           cartCount: this.cartCount,
           products: this.products,
-          totalPrice: this.totalPrice + product.price,
+          totalPrice: this.totalPrice + product.price * this.quantitySelect,
         };
         this.productService.setCart(cart);
         inCart = true;
@@ -55,7 +55,7 @@ export class ProductCardComponent implements OnInit {
       let cart = {
         cartCount: this.cartCount + 1,
         products: this.products,
-        totalPrice: this.totalPrice + product.price,
+        totalPrice: this.totalPrice + product.price * this.quantitySelect,
       };
       this.productService.setCart(cart);
     }
