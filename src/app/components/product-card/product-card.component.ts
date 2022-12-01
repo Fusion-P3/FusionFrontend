@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { AuthService } from 'src/app/services/auth.service';
@@ -22,7 +23,11 @@ export class ProductCardComponent implements OnInit {
   @Input() productInfo!: Product;
   displayName!:boolean;
 
-  constructor(private productService: ProductService, private auth: AuthService) { }
+  constructor(private productService: ProductService, private auth: AuthService, private router: Router) { 
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
+  }
 
   ngOnInit(): void {
     this.subscription = this.productService.getCart(this.auth.userId).subscribe((cart) => {
@@ -50,6 +55,7 @@ export class ProductCardComponent implements OnInit {
           this.cartCount = cart.cart.cartCount;
           this.products = cart.cart.products;
           this.totalPrice = cart.cart.totalPrice;
+          this.router.navigate(['cart']);
         });
         inCart = true;
       }
@@ -65,7 +71,7 @@ export class ProductCardComponent implements OnInit {
         userId: this.auth.userId,
         cart: {
           cartCount: this.cartCount + 1,
-          products: [newProduct],
+          products: this.products,
           totalPrice: this.totalPrice + product.price,
         }
       };
@@ -73,6 +79,7 @@ export class ProductCardComponent implements OnInit {
         this.cartCount = cart.cart.cartCount;
         this.products = cart.cart.products;
         this.totalPrice = cart.cart.totalPrice;
+        this.router.navigate(['cart']);
       });
     }
   }

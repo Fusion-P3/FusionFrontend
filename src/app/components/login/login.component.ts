@@ -14,27 +14,34 @@ export class LoginComponent implements OnInit {
     username: new UntypedFormControl(''),
     password: new UntypedFormControl('')
   })
-  
+
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
-  
-onSubmit(): void {
-  let user: userDTO = {
-    username: this.loginForm.get('username')?.value,
-    password: this.loginForm.get('password')?.value
-  }
-this.authService.login(user).subscribe(
-  {
-    next:(response) => {
-    this.authService.loggedIn=true;},
-    error:(err) => {console.log(err);},
-    complete: () => {this.router.navigate(['home']);}
-  }
-);
 
-}
+  onSubmit(): void {
+    let user: userDTO = {
+      username: this.loginForm.get('username')?.value,
+      password: this.loginForm.get('password')?.value
+    }
+    this.authService.login(user).subscribe(
+      {
+        next: (response) => {
+          this.authService.loggedIn = true;
+          this.authService.getUserId(user.username).subscribe({
+            next: (res) => { 
+              this.authService.userId = res.substring(1, res.length - 1);
+              this.router.navigate(['home']); },
+            error: (err) => { console.error(err); }
+          })
+        },
+        error: (err) => { console.log(err); },
+        complete: () => { }
+      }
+    );
+
+  }
 
   register(): void {
     this.router.navigate(['register']);

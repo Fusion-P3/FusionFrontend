@@ -34,7 +34,7 @@
       />
     </div>
     <div class="card-body">
-      <input type="number" [(ngModel)]="quantitySelect" />
+      <input type="number" min="0" [max]="productInfo.quantity" [(ngModel)]="quantitySelect" />
       <button class="btn btn-outline-success" (click)="addToCart(productInfo)">
         Add to Cart
       </button>
