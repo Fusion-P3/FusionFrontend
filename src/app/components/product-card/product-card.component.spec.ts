@@ -1,9 +1,11 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { AuthService } from 'src/app/services/auth.service';
 import { Cart, CartDto, ProductService } from 'src/app/services/product.service';
+import { ProductDetailsComponent } from '../product-details/product-details.component';
 
 import { ProductCardComponent } from './product-card.component';
 
@@ -15,7 +17,7 @@ describe('ProductCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, RouterTestingModule.withRoutes([{ path: 'cart', component: ProductDetailsComponent }])],
       declarations: [ProductCardComponent],
     }).compileComponents();
   });
