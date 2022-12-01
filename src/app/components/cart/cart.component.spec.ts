@@ -2,7 +2,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/services/auth.service';
 import { Cart, CartDto, ProductService } from 'src/app/services/product.service';
 import { NavbarComponent } from '../navbar/navbar.component';
 
@@ -12,7 +11,6 @@ describe('CartComponent', () => {
   let component: CartComponent;
   let fixture: ComponentFixture<CartComponent>;
   let pservice: ProductService;
-  let aservice: AuthService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -24,9 +22,6 @@ describe('CartComponent', () => {
 
   beforeEach(() => {
     pservice = TestBed.inject(ProductService);
-    aservice = TestBed.inject(AuthService);
-
-    //spyOnProperty(aservice, 'userId', 'get').and.returnValue('0');
     let cart: Cart = {
       cartCount: 0,
       products: [],

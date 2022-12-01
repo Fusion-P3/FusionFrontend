@@ -1,9 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-
+import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { RegisterComponent } from './register.component';
 
 describe('RegisterComponent', () => {
