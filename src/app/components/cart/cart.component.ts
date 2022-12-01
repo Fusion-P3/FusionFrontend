@@ -23,7 +23,7 @@ export class CartComponent implements OnInit {
     private auth: AuthService
   ) {}
 
-  username = this.auth.userName;
+  //username = this.auth.userName;
 
   ngOnInit(): void {
     this.productService.getCart(this.auth.userId).subscribe((cart) => {
