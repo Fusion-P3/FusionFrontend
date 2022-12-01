@@ -4,7 +4,8 @@ import { LoginComponent } from './login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from 'src/app/services/auth.service';
-import { from, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { UserDTO } from 'src/app/models/userDTO';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -34,13 +35,13 @@ describe('LoginComponent', () => {
   });
 
   it('should update loggedIn', () => {
-    let mockedRes: userDTO = {
+    let mockedRes: UserDTO = {
       username: 'test',
       password: 'test',
     };
 
     spyOn(authService, 'login').and.returnValue(
-      new Observable<userDTO>((o) => {
+      new Observable<UserDTO>((o) => {
         o.next(mockedRes);
       })
     );
@@ -56,7 +57,3 @@ describe('LoginComponent', () => {
     expect(authService.loggedIn).toBeTrue();
   });
 });
-export interface userDTO {
-  username: string;
-  password: string;
-}

@@ -2,22 +2,21 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { userDTO } from '../components/login/login.component';
+import { UserDTO } from '../models/userDTO';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   authUrl: string = `${environment.baseUrl}/auth`;
   loggedIn: boolean = false;
   // TODO: Hardwired for duncan
-  userId: string = "0df56b6a-26dd-47fe-81a2-e8297afd41be";
+  userId: string = '0df56b6a-26dd-47fe-81a2-e8297afd41be';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  login(user: userDTO): Observable<userDTO> {
-    return this.http.post<userDTO>(`${this.authUrl}/login`, user);
+  login(user: UserDTO): Observable<UserDTO> {
+    return this.http.post<UserDTO>(`${this.authUrl}/login`, user);
   }
 
   // Richard's login
@@ -30,8 +29,22 @@ export class AuthService {
     this.http.post(`${this.authUrl}/logout`, null);
   }
 
-  register(firstName: string, lastName: string, username: string, leetCodeName: string, password: string): Observable<any> {
-    const payload = { firstName: firstName, lastName: lastName, username: username, leetCodeName: leetCodeName, password: password };
-    return this.http.post<any>(`${this.authUrl}/register`, payload, { headers: environment.headers });
+  register(
+    firstName: string,
+    lastName: string,
+    username: string,
+    leetCodeName: string,
+    password: string
+  ): Observable<any> {
+    const payload = {
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
+      leetCodeName: leetCodeName,
+      password: password,
+    };
+    return this.http.post<any>(`${this.authUrl}/register`, payload, {
+      headers: environment.headers,
+    });
   }
 }
