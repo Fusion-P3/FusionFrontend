@@ -2,6 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { identifierName } from '@angular/compiler';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Product } from 'src/app/models/product';
 import { NavbarComponent } from '../navbar/navbar.component';
 
 import { CheckoutComponent } from './checkout.component';
@@ -9,7 +10,8 @@ import { CheckoutComponent } from './checkout.component';
 describe('CheckoutComponent', () => {
   let component: CheckoutComponent;
   let fixture: ComponentFixture<CheckoutComponent>;
-  const mockedProducts: any[] = [9, "Iron", 8, 9, "val","val",];
+  const mockedProducts: Product[] = [new Product(0, "test", 0, "test", 0, "test")];
+  let salesFlag:boolean=false;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -36,6 +38,10 @@ describe('CheckoutComponent', () => {
 
   it('should be falsy', () => {
     component.onSubmit();
-    expect(component.salesFlag).toBeFalsy();
+    expect(mockedProducts.forEach(element => {
+      if(element.name = "Iron"){
+        salesFlag = true;
+      }
+    })).toBeFalsy();
   });
 });

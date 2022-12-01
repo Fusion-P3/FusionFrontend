@@ -11,6 +11,7 @@ describe('DisplayProductsComponent', () => {
   let component: DisplayProductsComponent;
   let service: ProductService;
   let fixture: ComponentFixture<DisplayProductsComponent>;
+  let allProducts: Product[] = [];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -37,7 +38,11 @@ describe('DisplayProductsComponent', () => {
     expect(component).toBeTruthy();
   });
   it('should create', () => {
-    expect(service.getSaleProducts().subscribe()).toBeTruthy();
+    expect(service.getSaleProducts().subscribe({
+      next: (resp) => (allProducts = resp),
+      error: (err) => console.log(err),
+      complete: () => console.log('Products Retrieved'),
+    })).toBeTruthy();
   });
 
 });
