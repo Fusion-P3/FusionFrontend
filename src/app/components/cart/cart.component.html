@@ -1,12 +1,13 @@
 <app-navbar></app-navbar>
 <table class="table table-striped" id="cart-table" >
-  <caption>Your Fusion Factory Cart</caption>
+  <caption>{{username}} Fusion Factory Cart</caption>
   <thead>
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Name</th>
       <th scope="col">Quantity</th>
       <th scope="col">Description</th>
+      <th scope="col">Remove Item</th>
     </tr>
   </thead>
   <tbody id="cart-table-body">
@@ -15,6 +16,9 @@
       <td>{{ product.product.name }}</td>
       <td>{{ product.quantity }}</td>
       <td>{{ product.product.description }}</td>
+      <td><button class="btn btn-warning" id="removebutton" (click)="removeFromCart(product.product.id)">
+        Remove Item
+      </button></td>
     </tr>
   </tbody>
 </table>
