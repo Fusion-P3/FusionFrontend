@@ -8,11 +8,13 @@ import { userDTO } from '../components/login/login.component';
   providedIn: 'root'
 })
 export class AuthService {
+  getUserId(username: string): Observable<string> {
+    return this.http.get(`${environment.baseUrl}/auth/${username}`, { responseType: 'text' });
+  }
 
   authUrl: string = `${environment.baseUrl}/auth`;
   loggedIn: boolean = false;
-  // TODO: Hardwired for duncan
-  userId: string = "0df56b6a-26dd-47fe-81a2-e8297afd41be";
+  userId: string = "";
 
   constructor(private http: HttpClient) { }
 
@@ -27,7 +29,9 @@ export class AuthService {
   // }
 
   logout(): void {
-    this.http.post(`${this.authUrl}/logout`, null);
+    this.userId = "";
+    this.loggedIn = false;
+    //this.http.post(`${this.authUrl}/logout`, null);
   }
 
   register(firstName: string, lastName: string, username: string, leetCodeName: string, password: string): Observable<any> {
