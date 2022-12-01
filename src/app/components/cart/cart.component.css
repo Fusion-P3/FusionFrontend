@@ -1,9 +1,9 @@
 .table 
 {
-    margin: 3%;
+    /* margin: 3%; Do not do this with tables. Tables always act funny.*/
+    padding: 3%;
 }
 
-.btn
-{
-    margin-left: 2%;
-}
+.btn {margin-left: 2%;}
+
+#removebutton {margin: 0 10px 0 0;}
