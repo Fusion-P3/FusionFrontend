@@ -30,12 +30,14 @@ export class LoginComponent implements OnInit {
         next: (response) => {
           this.authService.loggedIn = true;
           this.authService.getUserId(user.username).subscribe({
-            next: (res) => { this.authService.userId = res.substring(1, res.length - 1) },
+            next: (res) => { 
+              this.authService.userId = res.substring(1, res.length - 1);
+              this.router.navigate(['home']); },
             error: (err) => { console.error(err); }
           })
         },
         error: (err) => { console.log(err); },
-        complete: () => { this.router.navigate(['home']); }
+        complete: () => { }
       }
     );
 
