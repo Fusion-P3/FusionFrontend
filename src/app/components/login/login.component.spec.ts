@@ -16,7 +16,8 @@ describe('LoginComponent', () => {
       imports: [
         HttpClientTestingModule,
         ReactiveFormsModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([{ path: 'register', component: LoginComponent },
+        { path: 'home', component: LoginComponent }]),
       ],
       declarations: [LoginComponent],
     }).compileComponents();
@@ -45,12 +46,19 @@ describe('LoginComponent', () => {
       })
     );
 
+    spyOn(authService, 'getUserId').and.returnValue(new Observable<string>(o => {
+      o.next("9");
+      o.complete();
+    }))
+
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
 
     component.loginForm.controls['username'].setValue('test');
     component.loginForm.controls['password'].setValue('test');
     component.onSubmit();
+
+    component.register();
 
     fixture.detectChanges();
     expect(authService.loggedIn).toBeTrue();
