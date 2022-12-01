@@ -22,7 +22,7 @@
             aria-describedby="inputGroup-sizing-sm" disabled>
     </div>
     <div class="card-body">
-        <input type="number" class="mr-3"[(ngModel)]="quantitySelect" />
+        <input type="number" min="0" [max]="product.quantity" class="mr-3"[(ngModel)]="quantitySelect" />
         <button class="btn btn-outline-success" (click)="addToCart(product)">Add to Cart</button>
     </div>
 </div>
