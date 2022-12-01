@@ -8,7 +8,11 @@ export class Product {
 
     constructor(id: number, name: string, quantity: number, description: string, price: number, image: string) {
         this.id = id;
-        this.name = name;
+        if (name = "Iron"){
+            this.name = "Iron Sale";
+        }else {
+            this.name = name;
+        }
         this.quantity = quantity;
         this.description = description;
         this.price = price;
