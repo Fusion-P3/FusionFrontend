@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { IWikiResponse } from '../models/IWikiResponse';
@@ -11,7 +11,7 @@ describe('WikiService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ HttpClientTestingModule ]
+      imports: [HttpClientTestingModule]
     });
     service = TestBed.inject(WikiService);
     httpMock = TestBed.inject(HttpTestingController);
@@ -27,50 +27,50 @@ describe('WikiService', () => {
       type: '',
       title: 'Hydrogen',
       displaytitle: '',
-    namespace: {
+      namespace: {
         id: 0,
         text: '',
-    },
-    wikibase_item: '',
-    titles: {
+      },
+      wikibase_item: '',
+      titles: {
         canonical: '',
         normalized: '',
         display: '',
-    },
-    pageid: 0,
-    thumbnail: {
+      },
+      pageid: 0,
+      thumbnail: {
         source: '',
         width: 0,
         height: 0,
-    },
-    originalimage: {
+      },
+      originalimage: {
         source: '',
         width: 0,
         height: 0,
-    },
-    lang: '',
-    dir: '',
-    revision: '',
-    tid: '',
-    timestamp: '',
-    description: '',
-    description_source: '',
-    content_urls: {
+      },
+      lang: '',
+      dir: '',
+      revision: '',
+      tid: '',
+      timestamp: '',
+      description: '',
+      description_source: '',
+      content_urls: {
         desktop: {
-            page: '',
-            revisions: '',
-            edit: '',
-            talk: '',
+          page: '',
+          revisions: '',
+          edit: '',
+          talk: '',
         },
         mobile: {
-            page: '',
-            revisions: '',
-            edit: '',
-            talk: '',
+          page: '',
+          revisions: '',
+          edit: '',
+          talk: '',
         }
-    },
-    extract: '',
-    extract_html: '',
+      },
+      extract: '',
+      extract_html: '',
     }
 
     service.getSummary(productName).subscribe((res) => {

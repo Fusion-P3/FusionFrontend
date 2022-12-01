@@ -1,6 +1,6 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { userDTO } from '../components/login/login.component';
+import { UserDTO } from '../components/login/login.component';
 
 import { AuthService } from './auth.service';
 
@@ -23,7 +23,7 @@ describe('AuthService', () => {
   });
 
   it('should login', () => {
-    let dto: userDTO = {
+    let dto: UserDTO = {
       username: 'test ',
       password: 'password'
     };
