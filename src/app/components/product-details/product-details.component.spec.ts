@@ -72,7 +72,7 @@ describe('ProductDetailsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ProductDetailsComponent, NavbarComponent],
-      imports: [RouterTestingModule, HttpClientTestingModule, FormsModule]
+      imports: [RouterTestingModule.withRoutes([{ path: 'cart', component: ProductDetailsComponent }]), HttpClientTestingModule, FormsModule]
     })
       .compileComponents();
 

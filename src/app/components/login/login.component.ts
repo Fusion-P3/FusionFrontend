@@ -20,14 +20,21 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(): void {
-    let user: UserDTO = {
+    let user: userDTO = {
       username: this.loginForm.get('username')?.value,
       password: this.loginForm.get('password')?.value,
     };
     this.authService.login(user).subscribe({
       next: (response) => {
-        console.log(response);
         this.authService.loggedIn = true;
+        this.authService.getUserId(user.username).subscribe({
+          next: (res) => {
+            this.authService.userId = res.substring(1, res.length - 1);
+          },
+          error: (err) => {
+            console.error(err);
+          },
+        });
       },
       error: (err) => {
         console.log(err);
