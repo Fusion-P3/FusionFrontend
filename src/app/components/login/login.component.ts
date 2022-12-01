@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(): void {
-    let user: userDTO = {
+    let user: UserDTO = {
       username: this.loginForm.get('username')?.value,
       password: this.loginForm.get('password')?.value,
     };
