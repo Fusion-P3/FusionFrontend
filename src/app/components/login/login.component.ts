@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
         next: (response) => {
           this.authService.loggedIn = true;
           this.authService.getUserId(user.username).subscribe({
-            next: (res) => { this.authService.userId = res },
+            next: (res) => { this.authService.userId = res.substring(1, res.length - 1) },
             error: (err) => { console.error(err); }
           })
         },
