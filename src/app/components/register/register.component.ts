@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -19,20 +18,21 @@ export class RegisterComponent implements OnInit {
     lcname: new UntypedFormControl(''),
     password: new UntypedFormControl('')
   })
-  
 
-  constructor(private authService: AuthService, private router: Router) { 
-    }
+
+  constructor(private authService: AuthService, private router: Router) {
+  }
 
   ngOnInit(): void {
+    // Should not be empty lol
   }
-  
+
   onSubmit(): void {
-    this.authService.register(this.registerForm.get('fname')?.value, this.registerForm.get('lname')?.value, this.registerForm.get('uname')?.value, this.registerForm.get('lcname')?.value, this.registerForm.get('password')?.value).subscribe(
-      () => console.log("New user registered"),
-      (err) => console.log(err),
-      () => this.router.navigate(['login'])
-    );
+    this.authService.register(this.registerForm.get('fname')?.value, this.registerForm.get('lname')?.value, this.registerForm.get('uname')?.value, this.registerForm.get('lcname')?.value, this.registerForm.get('password')?.value).subscribe({
+      next: () => console.log("New user registered"),
+      error: (err) => console.log(err),
+      complete: () => this.router.navigate(['login'])
+    });
   }
 
 }

@@ -24,16 +24,9 @@ export class AuthService {
     return this.http.post<UserDTO>(`${this.authUrl}/login`, user);
   }
 
-  // Richard's login
-  // login(email: string, password: string): Observable<any> {
-  //   const payload = {email:email, password:password};
-  //   return this.http.post<any>(`${this.authUrl}/login`, payload, {headers: environment.headers, withCredentials: environment.withCredentials});
-  // }
-
   logout(): void {
     this.userId = '';
     this.loggedIn = false;
-    //this.http.post(`${this.authUrl}/logout`, null);
   }
 
   register(

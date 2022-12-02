@@ -12,14 +12,16 @@ import { LeetcodeService } from 'src/app/services/leetcode.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  loginForm = new UntypedFormGroup({
+  loginForm: UntypedFormGroup = new UntypedFormGroup({
     username: new UntypedFormControl(''),
     password: new UntypedFormControl(''),
   });
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // ngOnInit
+  }
 
   onSubmit(): void {
     let user: UserDTO = {
@@ -32,6 +34,7 @@ export class LoginComponent implements OnInit {
         this.authService.getUserId(user.username).subscribe({
           next: (res) => {
             this.authService.userId = res.substring(1, res.length - 1);
+            this.router.navigate(['home']);
           },
           error: (err) => {
             console.error(err);
@@ -41,9 +44,7 @@ export class LoginComponent implements OnInit {
       error: (err) => {
         console.log(err);
       },
-      complete: () => {
-        this.router.navigate(['home']);
-      },
+      complete: () => {},
     });
   }
 

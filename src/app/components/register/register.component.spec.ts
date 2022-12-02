@@ -1,9 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-
+import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 import { RegisterComponent } from './register.component';
 
 describe('RegisterComponent', () => {
@@ -15,11 +15,12 @@ describe('RegisterComponent', () => {
     uname: new UntypedFormControl('m'),
     lcname: new UntypedFormControl(''),
     password: new UntypedFormControl('')
-  })
+  });
+  let aserve: AuthService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, ReactiveFormsModule],
+      imports: [HttpClientTestingModule, ReactiveFormsModule, RouterTestingModule.withRoutes([{ path: 'login', component: RegisterComponent }])],
       declarations: [RegisterComponent]
     })
       .compileComponents();
@@ -29,6 +30,11 @@ describe('RegisterComponent', () => {
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    aserve = TestBed.inject(AuthService);
+    spyOn(aserve, 'register').and.returnValue(new Observable<any>(o => {
+      o.next(0);
+      o.complete();
+    }));
   });
 
 
@@ -37,6 +43,9 @@ describe('RegisterComponent', () => {
   });
   it('should contain a username', () => {
     expect(mockedRegistration).toBeTruthy();
+
+    component.onSubmit();
+    expect(component).toBeTruthy();
   });
 
 

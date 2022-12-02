@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/models/product';
-import { AuthService } from 'src/app/services/auth.service';
 import { Cart, CartDto, ProductService } from 'src/app/services/product.service';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
 
@@ -13,7 +12,6 @@ describe('ProductCardComponent', () => {
   let component: ProductCardComponent;
   let fixture: ComponentFixture<ProductCardComponent>;
   let pservice: ProductService;
-  let aservice: AuthService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -25,9 +23,6 @@ describe('ProductCardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductCardComponent);
     pservice = TestBed.inject(ProductService);
-    aservice = TestBed.inject(AuthService);
-
-    //spyOnProperty(aservice, 'userId', 'get').and.returnValue('0');
     let cart: Cart = {
       cartCount: 0,
       products: [],

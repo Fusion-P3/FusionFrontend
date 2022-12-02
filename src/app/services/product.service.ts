@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Product } from '../models/product';
 import { environment } from 'src/environments/environment';
-import { CheckoutDto } from './checkout.service';
 
 export interface Cart {
   cartCount: number;
@@ -34,6 +33,10 @@ export class ProductService {
 
   public getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(environment.baseUrl + this.productUrl, { headers: environment.headers, withCredentials: environment.withCredentials });
+  }
+
+  public getSaleProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(environment.baseUrl + this.productUrl + '/sale', { headers: environment.headers, withCredentials: environment.withCredentials });
   }
 
   public getSingleProduct(name: string): Observable<Product> {

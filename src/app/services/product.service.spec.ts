@@ -16,4 +16,14 @@ describe('ProductService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should be created', () => {
+    expect(service.getProducts()).toBeTruthy();
+  });
+
+  it('should be created', () => {
+    expect(service.getSaleProducts()).toBeTruthy();
+  });
+
+
 });

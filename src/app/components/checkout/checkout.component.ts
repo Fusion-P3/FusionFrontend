@@ -34,6 +34,8 @@ export class CheckoutComponent implements OnInit {
     country: new UntypedFormControl('', Validators.required)
   });
 
+  public salesFlag:boolean=false;
+
   constructor(private productService: ProductService, private router: Router, private checkoutService: CheckoutService, private auth: AuthService) { }
 
   ngOnInit(): void {
@@ -49,6 +51,12 @@ export class CheckoutComponent implements OnInit {
   }
 
   onSubmit(): void {
+    //search cart for iron
+    this.cartProducts.forEach(element => {
+      if(element.name = "Iron"){
+        this.salesFlag = true;
+      }
+    });
     let checkoutDto: CheckoutDto = {
       user_id: this.auth.userId
     }
@@ -60,34 +68,4 @@ export class CheckoutComponent implements OnInit {
       error: (err) => console.error(err)
     })
   }
-
-  // onSubmit(): void {
-  //   this.products.forEach(
-  //     (element) => {
-  //       const id = element.product.id;
-  //       const quantity = element.quantity
-  //       this.finalProducts.push({id, quantity})
-  //     } 
-  //   );
-
-  //   if(this.finalProducts.length > 0) {
-  //     this.productService.purchase(this.finalProducts).subscribe(
-  //       (resp) => console.log(resp),
-  //       (err) => console.log(err),
-  //       () => {
-  //         let cart = {
-  //           cartCount: 0,
-  //           products: [],
-  //           totalPrice: 0.00
-  //         };
-  //         this.productService.setCart(cart);
-  //         this.router.navigate(['/home']);
-  //       } 
-  //     );
-
-  //   } else {
-  //     this.router.navigate(['/home']);
-  //   }
-  // }
-
 }

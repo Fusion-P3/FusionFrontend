@@ -21,6 +21,7 @@ export class ProductCardComponent implements OnInit {
   quantitySelect: number = 0;
 
   @Input() productInfo!: Product;
+  displayName!:boolean;
 
   constructor(private productService: ProductService, private auth: AuthService, private router: Router) { 
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
