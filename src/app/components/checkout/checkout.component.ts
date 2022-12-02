@@ -34,6 +34,8 @@ export class CheckoutComponent implements OnInit {
     country: new UntypedFormControl('', Validators.required)
   });
 
+  public salesFlag:boolean=false;
+
   constructor(private productService: ProductService, private router: Router, private checkoutService: CheckoutService, private auth: AuthService) { }
 
   ngOnInit(): void {
@@ -49,6 +51,12 @@ export class CheckoutComponent implements OnInit {
   }
 
   onSubmit(): void {
+    //search cart for iron
+    this.cartProducts.forEach(element => {
+      if(element.name = "Iron"){
+        this.salesFlag = true;
+      }
+    });
     let checkoutDto: CheckoutDto = {
       user_id: this.auth.userId
     }
