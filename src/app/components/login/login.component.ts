@@ -3,6 +3,8 @@ import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserDTO } from 'src/app/models/userDTO';
 import { AuthService } from 'src/app/services/auth.service';
+import { InventoryService } from 'src/app/services/inventory.service';
+import { LeetcodeService } from 'src/app/services/leetcode.service';
 
 @Component({
   selector: 'app-login',
@@ -26,8 +28,6 @@ export class LoginComponent implements OnInit {
     };
     this.authService.login(user).subscribe({
       next: (response) => {
-        console.log(response);
-
         this.authService.loggedIn = true;
         this.authService.getUserId(user.username).subscribe({
           next: (res) => {
