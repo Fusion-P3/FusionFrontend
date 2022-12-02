@@ -11,28 +11,24 @@ import { CheckoutComponent } from 'src/app/components/checkout/checkout.componen
 export class DisplayProductsComponent implements OnInit {
   allProducts: Product[] = [];
 
-
-
-  constructor(private productService: ProductService, public sales:CheckoutComponent) {
-  }
-
+  constructor(
+    private productService: ProductService,
+    public sales: CheckoutComponent
+  ) {}
 
   ngOnInit(): void {
-
-    if (this.sales?.salesFlag == true){
+    if (this.sales?.salesFlag) {
       this.productService.getSaleProducts().subscribe({
         next: (resp) => (this.allProducts = resp),
         error: (err) => console.log(err),
         complete: () => console.log('Products Retrieved'),
       });
-    }
-    else{
+    } else {
       this.productService.getProducts().subscribe({
         next: (resp) => (this.allProducts = resp),
         error: (err) => console.log(err),
         complete: () => console.log('Products Retrieved'),
       });
     }
-      
   }
 }

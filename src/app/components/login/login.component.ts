@@ -3,8 +3,6 @@ import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserDTO } from 'src/app/models/userDTO';
 import { AuthService } from 'src/app/services/auth.service';
-import { InventoryService } from 'src/app/services/inventory.service';
-import { LeetcodeService } from 'src/app/services/leetcode.service';
 
 @Component({
   selector: 'app-login',
