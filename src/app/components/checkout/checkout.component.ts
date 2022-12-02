@@ -34,7 +34,7 @@ export class CheckoutComponent implements OnInit {
     country: new UntypedFormControl('', Validators.required)
   });
 
-  salesFlag:boolean=false;
+  public salesFlag:boolean=false;
 
   constructor(private productService: ProductService, private router: Router, private checkoutService: CheckoutService, private auth: AuthService) { }
 

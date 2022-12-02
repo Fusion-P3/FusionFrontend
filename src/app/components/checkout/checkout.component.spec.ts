@@ -10,7 +10,7 @@ import { CheckoutComponent } from './checkout.component';
 describe('CheckoutComponent', () => {
   let component: CheckoutComponent;
   let fixture: ComponentFixture<CheckoutComponent>;
-  const mockedProducts: Product[] = [new Product(0, "test", 0, "test", 0, "test")];
+  const mockedProducts: Product[] = [new Product(0, "Iron", 0, "test", 0, "test")];
   let salesFlag:boolean=false;
 
   beforeEach(async () => {
@@ -37,11 +37,15 @@ describe('CheckoutComponent', () => {
   });
 
   it('should be falsy', () => {
+    component.cartProducts.push({
+      name:"Iron",
+      id: 0,
+      quantity: 0,
+      price: 0,
+      description: "",
+      image: ""
+    })
     component.onSubmit();
-    expect(mockedProducts.forEach(element => {
-      if(element.name = "Iron"){
-        salesFlag = true;
-      }
-    })).toBeFalsy();
+    expect(component).toBeTruthy();
   });
 });

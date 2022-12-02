@@ -11,9 +11,11 @@ import { CheckoutComponent } from 'src/app/components/checkout/checkout.componen
 export class DisplayProductsComponent implements OnInit {
   allProducts: Product[] = [];
 
-  sales!: CheckoutComponent;
 
-  constructor(private productService: ProductService) {}
+
+  constructor(private productService: ProductService, public sales:CheckoutComponent) {
+  }
+
 
   ngOnInit(): void {
 
