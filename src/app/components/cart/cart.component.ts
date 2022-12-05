@@ -14,7 +14,7 @@ export class CartComponent implements OnInit {
     product: Product;
     quantity: number;
   }[] = [];
-  totalPrice!: number;
+  totalPrice: number = 0;
   cartProducts: Product[] = [];
 
   constructor(
@@ -29,10 +29,7 @@ export class CartComponent implements OnInit {
       this.products.forEach((element) =>
         this.cartProducts.push(element.product)
       );
-      this.totalPrice = this.products.reduce(
-        (a, b) => a + b.product.price * b.quantity,
-        0
-      );
+      this.totalPrice = cart.totalPrice;
     });
   }
 
