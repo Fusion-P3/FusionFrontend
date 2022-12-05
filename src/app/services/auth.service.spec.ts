@@ -1,5 +1,6 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing'
+import { environment } from 'src/environments/environment';
 import { UserDTO } from '../components/login/login.component';
 
 import { AuthService } from './auth.service';
@@ -31,7 +32,7 @@ describe('AuthService', () => {
     service.login(dto).subscribe((response) => {
       expect(response).toBe(dto);
     });
-    const res = controller.expectOne('https://localhost:7078/auth/login');
+    const res = controller.expectOne(`${environment.baseUrl}/auth/login`);
     expect(res.request.method).toBe('POST');
     res.flush(dto);
   });
@@ -41,7 +42,7 @@ describe('AuthService', () => {
     service.register('test', 'test', 'test', 'test', 'test').subscribe((response) => {
       expect(response).toBeTruthy()
     });
-    const res = controller.expectOne('https://localhost:7078/auth/register');
+    const res = controller.expectOne(`${environment.baseUrl}/auth/register`);
     expect(res.request.method).toBe('POST');
     res.flush(true);
   });
