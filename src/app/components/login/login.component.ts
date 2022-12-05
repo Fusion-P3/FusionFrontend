@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
     };
     this.authService.login(user).subscribe({
       next: (response) => {
-        this.authService.userId = response.userId ? response.userId : '';
         this.authService.loggedIn = true;
         this.authService.getUserId(user.username).subscribe({
           next: (res) => {
