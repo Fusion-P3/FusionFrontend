@@ -24,16 +24,16 @@ import { ProductDetailsComponent } from './components/product-details/product-de
     CartComponent,
     CheckoutComponent,
     DisplayProductsComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [CheckoutComponent],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
