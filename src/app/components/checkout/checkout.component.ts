@@ -23,22 +23,9 @@ export class CheckoutComponent implements OnInit {
     product: Product;
     quantity: number;
   }[] = [];
-  totalPrice!: number;
+  totalPrice: number = 0;
   cartProducts: Product[] = [];
   finalProducts: { id: number; quantity: number }[] = [];
-
-  checkoutForm = new UntypedFormGroup({
-    fname: new UntypedFormControl('', Validators.required),
-    lname: new UntypedFormControl('', Validators.required),
-    cardName: new UntypedFormControl('', Validators.required),
-    detail: new UntypedFormControl('', Validators.required),
-    addOne: new UntypedFormControl('', Validators.required),
-    addTwo: new UntypedFormControl(''),
-    city: new UntypedFormControl('', Validators.required),
-    state: new UntypedFormControl('', Validators.required),
-    zipCode: new UntypedFormControl('', Validators.required),
-    country: new UntypedFormControl('', Validators.required),
-  });
 
   public salesFlag: boolean = false;
 
