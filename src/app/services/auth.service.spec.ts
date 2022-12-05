@@ -1,7 +1,10 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing'
 import { environment } from 'src/environments/environment';
-import { UserDTO } from '../components/login/login.component';
+import { UserDTO } from '../models/userDTO';
 
 import { AuthService } from './auth.service';
 
@@ -11,7 +14,7 @@ describe('AuthService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule],
     });
     service = TestBed.inject(AuthService);
     controller = TestBed.inject(HttpTestingController);
@@ -26,7 +29,7 @@ describe('AuthService', () => {
   it('should login', () => {
     let dto: UserDTO = {
       username: 'test ',
-      password: 'password'
+      password: 'password',
     };
 
     service.login(dto).subscribe((response) => {
@@ -45,5 +48,12 @@ describe('AuthService', () => {
     const res = controller.expectOne(`${environment.baseUrl}/auth/register`);
     expect(res.request.method).toBe('POST');
     res.flush(true);
+  });
+
+  it('should logout', () => {
+    service.logout();
+
+    expect(service.userId).toBeFalsy();
+    expect(service.loggedIn).toBeFalse();
   });
 });

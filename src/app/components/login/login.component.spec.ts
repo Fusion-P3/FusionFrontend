@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { LoginComponent, UserDTO } from './login.component';
+import { LoginComponent } from './login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from 'src/app/services/auth.service';
 import { Observable } from 'rxjs';
+import { UserDTO } from 'src/app/models/userDTO';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -16,8 +17,10 @@ describe('LoginComponent', () => {
       imports: [
         HttpClientTestingModule,
         ReactiveFormsModule,
-        RouterTestingModule.withRoutes([{ path: 'register', component: LoginComponent },
-        { path: 'home', component: LoginComponent }]),
+        RouterTestingModule.withRoutes([
+          { path: 'register', component: LoginComponent },
+          { path: 'home', component: LoginComponent },
+        ]),
       ],
       declarations: [LoginComponent],
     }).compileComponents();
@@ -46,10 +49,12 @@ describe('LoginComponent', () => {
       })
     );
 
-    spyOn(authService, 'getUserId').and.returnValue(new Observable<string>(o => {
-      o.next("9");
-      o.complete();
-    }))
+    spyOn(authService, 'getUserId').and.returnValue(
+      new Observable<string>((o) => {
+        o.next('9');
+        o.complete();
+      })
+    );
 
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
