@@ -50,7 +50,7 @@ export class CheckoutComponent implements OnInit {
     //search cart for iron
     this.cartProducts.forEach((element) => {
       if (element.name == 'Iron') {
-        this.salesFlag = true;
+        this.checkoutService.salesFlag = true;
       }
     });
     let checkoutDto: CheckoutDto = {

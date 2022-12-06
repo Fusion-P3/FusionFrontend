@@ -1,5 +1,5 @@
 <div *ngIf="productInfo != null && productInfo.name != 'Hydrogen'">
-  <div class="card">
+  <div class="card" [ngStyle]="{'background-color': productInfo.name == 'Xenon' || productInfo.name == 'Lead' ? '#fa1965' : ''}">
     <img [routerLink]="['/product/', productInfo.name]" class="card-img-top" [src]="productInfo.image" alt="Card image cap"/>
     <div class="card-body">
       <h5 class="card-title" *ngIf = "productInfo.name">{{ productInfo.name }}</h5>

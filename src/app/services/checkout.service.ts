@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class CheckoutService {
   checkoutUrl: string = `${environment.baseUrl}/checkout`;
+  salesFlag: boolean = false;
 
   constructor(private client: HttpClient) { }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { CheckoutComponent } from 'src/app/components/checkout/checkout.component';
+import { CheckoutService } from 'src/app/services/checkout.service';
 
 @Component({
   selector: 'app-display-products',
@@ -13,7 +14,7 @@ export class DisplayProductsComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    public sales: CheckoutComponent
+    public sales: CheckoutService
   ) {}
 
   ngOnInit(): void {
@@ -21,7 +22,7 @@ export class DisplayProductsComponent implements OnInit {
       this.productService.getSaleProducts().subscribe({
         next: (resp) => {this.allProducts = resp; this.allProducts.sort((a, b) => a == b ? 0 : (a.price > b.price ? 1 : -1))},
         error: (err) => console.log(err),
-        complete: () => console.log('Products Retrieved'),
+        complete: () => console.log('Sale Products Retrieved'),
       });
     } else {
       this.productService.getProducts().subscribe({
