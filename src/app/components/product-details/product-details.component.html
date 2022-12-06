@@ -1,28 +1,50 @@
 <app-navbar></app-navbar>
 <div class="container border border-3 rounded-4 border-white">
-    <div class="top-info">
-        <h1>{{product.name}}</h1>
-        <img class="product-image" [src]="product.image" alt="Product Image">
+  <div class="top-info">
+    <h1>{{ product.name }}</h1>
+    <img class="product-image" [src]="product.image" alt="Product Image" />
+  </div>
+  <div class="description">
+    <p>{{ fullDescription }}</p>
+  </div>
+  <div class="input-group input-group-sm mb-3 w-25">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">$</span>
     </div>
-    <div class="description">
-        <p>{{fullDescription}}</p>
+    <input
+      type="number"
+      class="form-control"
+      aria-label="Sizing example input"
+      [value]="product.price"
+      aria-describedby="inputGroup-sizing-sm"
+      disabled
+    />
+  </div>
+  <div class="input-group input-group-sm mb-3 w-25">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm"
+        >Quantity in Stock</span
+      >
     </div>
-    <div class="input-group input-group-sm mb-3 w-25">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-sm">$</span>
-        </div>
-        <input type="number" class="form-control" aria-label="Sizing example input" [value]="product.price"
-            aria-describedby="inputGroup-sizing-sm" disabled>
-    </div>
-    <div class="input-group input-group-sm mb-3 w-25">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Quantity in Stock</span>
-        </div>
-        <input type="number" class="form-control" aria-label="Sizing example input" [value]="product.quantity"
-            aria-describedby="inputGroup-sizing-sm" disabled>
-    </div>
-    <div class="card-body">
-        <input type="number" min="0" [max]="product.quantity" class="mr-3"[(ngModel)]="quantitySelect" />
-        <button class="btn btn-outline-success" (click)="addToCart(product)">Add to Cart</button>
-    </div>
+    <input
+      type="number"
+      class="form-control"
+      aria-label="Sizing example input"
+      [value]="product.quantity"
+      aria-describedby="inputGroup-sizing-sm"
+      disabled
+    />
+  </div>
+  <div class="card-body">
+    <input
+      type="number"
+      min="1"
+      [max]="product.quantity"
+      class="mr-3"
+      [(ngModel)]="quantitySelect"
+    />
+    <button class="btn btn-outline-success" (click)="addToCart(product)">
+      Add to Cart
+    </button>
+  </div>
 </div>
