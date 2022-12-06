@@ -73,6 +73,7 @@ export class CartComponent implements OnInit {
         this.cartProducts.push(element.product)
       );
       this.totalPrice = cart.cart.totalPrice;
+      
     });
   }
 }

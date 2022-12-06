@@ -1,8 +1,8 @@
-<img
-  src="../../../assets/images/FusionFactory-Logo-Pink-Trns.png"
-  width="30%"
-  height="30%"
+<div class="container border border-3 rounded-4 border-white">
+  <img
+  src="../../../assets/images/FusionFactory-Logo-Whit-Trns.png"
   alt="Fusion Factory"
+  class="logo-login"
 />
 <form id="login-form" [formGroup]="loginForm">
   <div class="form-group">
@@ -32,3 +32,4 @@
   <button class="btn btn-primary" (click)="onSubmit()">Login</button>
   <button class="btn btn-primary" [routerLink]="['/register']">Register</button>
 </form>
+</div>

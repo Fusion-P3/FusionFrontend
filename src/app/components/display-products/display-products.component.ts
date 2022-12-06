@@ -19,16 +19,20 @@ export class DisplayProductsComponent implements OnInit {
   ngOnInit(): void {
     if (this.sales?.salesFlag) {
       this.productService.getSaleProducts().subscribe({
-        next: (resp) => (this.allProducts = resp),
+        next: (resp) => {this.allProducts = resp; this.allProducts.sort((a, b) => a == b ? 0 : (a.price > b.price ? 1 : -1))},
         error: (err) => console.log(err),
         complete: () => console.log('Products Retrieved'),
       });
     } else {
       this.productService.getProducts().subscribe({
-        next: (resp) => (this.allProducts = resp),
+        next: (resp) => {(this.allProducts = resp); this.allProducts.sort((a, b) => a == b ? 0 : (a.price > b.price ? 1 : -1)
+
+      );},
         error: (err) => console.log(err),
         complete: () => console.log('Products Retrieved'),
       });
     }
   }
 }
+
+

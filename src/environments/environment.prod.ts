@@ -1,3 +1,8 @@
 export const environment = {
-  production: true
+  production: true,
+  withCredentials: false,
+  baseUrl: "https://fusion-backend.azurewebsites.net",
+  headers: {
+    'Content-Type': 'application/json',
+  },
 };
