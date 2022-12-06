@@ -26,16 +26,6 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/styles.scss"
-              // {
-              //   "input": "_variables.scss",
-              //   "bundleName": "light",
-              //   "inject": true
-              // },
-              // {
-              //   "input": "_variables_dark.scss",
-              //   "bundleName": "dark",
-              //   "inject": true
-              // }
             ],
             "scripts": []
           },
@@ -53,7 +43,14 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+          
             },
             "development": {
               "buildOptimizer": false,
