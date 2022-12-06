@@ -3,11 +3,6 @@ import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import {
-  UntypedFormControl,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
-import {
   CheckoutDto,
   CheckoutService,
 } from 'src/app/services/checkout.service';
