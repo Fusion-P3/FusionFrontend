@@ -1,7 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import "variables";
 @import "../node_modules/bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
+// @mixin theme-colors($darktheme: false)
+// {
+// @if $darktheme { 
+//   background-color: tint-color($primary, 50%);
+// } else {
+//   background-color: tint-color($dark, 50%);
+// }
+// }
 
 body {
+  // @include theme-colors($darktheme: true);
   background-color: tint-color($primary, 50%);
 }

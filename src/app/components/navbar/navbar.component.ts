@@ -12,6 +12,7 @@ import { ProductService } from 'src/app/services/product.service';
 export class NavbarComponent implements OnInit {
 
   cartCount!: number;
+  totalPrice!: number;
   subscription!: Subscription;
 
   constructor(private authService: AuthService, private router: Router, private productService: ProductService) { }
@@ -19,6 +20,12 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.subscription = this.productService.getCart(this.authService.userId).subscribe(
       (cart) => this.cartCount = cart.cartCount
+    );
+    this.subscription = this.productService.getCart(this.authService.userId).subscribe(
+      (cart) => this.totalPrice = cart.products.reduce(
+        (a, b) => a + b.product.price * b.quantity,
+        0
+      )
     );
   }
 
