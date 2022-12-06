@@ -5,8 +5,7 @@ nav {
 .titleh4 {
   font-size: 200%;
   font-family: "Oswald", sans-serif;
-  font-weight:400;
-  text-shadow: 3px 3px 5px black;
+  font-weight: 400;
   max-width: 300px;
 }
 
@@ -17,7 +16,7 @@ nav {
 }
 
 .form-inline {
-max-width: 300px;
+  max-width: 450px;
 }
 
 button {
@@ -26,13 +25,11 @@ button {
 }
 
 @media screen and (max-width: 600px) {
+  .form-inline {
+    margin: 0 auto;
+  }
 
-.form-inline {
-margin: 0 auto;
-}
-
-.titleh4 {
-  margin: 0 auto;
-}
-
+  .titleh4 {
+    margin: 0 auto;
+  }
 }

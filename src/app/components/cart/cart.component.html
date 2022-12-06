@@ -1,6 +1,7 @@
 <app-navbar></app-navbar>
+<div class="container border border-3 rounded-4 border-white bg-white">
 <table class="table table-striped" id="cart-table" >
-  <caption><!--{{username}}--> Fusion Factory Cart</caption>
+  <caption class="text-black"><!--{{username}}--> Your Cart</caption>
   <thead>
     <tr>
       <th scope="col">ID</th>
@@ -27,3 +28,4 @@
 <button class="btn btn-primary" [routerLink]="['/checkout']">
   Proceed to Checkout (${{ totalPrice }})
 </button>
+</div>
