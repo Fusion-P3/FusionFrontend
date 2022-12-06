@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { InventoryDTO } from '../models/inventoryDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +12,8 @@ export class InventoryService {
 
   constructor(private http: HttpClient) {}
 
-  getInventory(userId: string) {
-    return this.http.get(this.baseurl);
+  getInventory(userId: string): Observable<InventoryDTO[]> {
+    return this.http.get<InventoryDTO[]>(this.baseurl + userId);
   }
 
   createInventoryItem(
