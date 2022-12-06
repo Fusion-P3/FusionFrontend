@@ -1,11 +1,11 @@
-<div *ngIf="productInfo != null">
-  <div class="card" style="width: 18rem">
-    <img class="card-img-top" [src]="productInfo.image" alt="Card image cap" />
+<div *ngIf="productInfo != null && productInfo.name != 'Hydrogen'">
+  <div class="card">
+    <img [routerLink]="['/product/', productInfo.name]" class="card-img-top" [src]="productInfo.image" alt="Card image cap"/>
     <div class="card-body">
       <h5 class="card-title">{{ productInfo.name }}</h5>
       <p class="card-text">{{ productInfo.description }}</p>
     </div>
-    <div class="input-group input-group-sm mb-3">
+    <div class="input-group input-group-sm mb-0">
       <div class="input-group-prepend">
         <span class="input-group-text" id="inputGroup-sizing-sm">$</span>
       </div>
@@ -18,10 +18,10 @@
         disabled
       />
     </div>
-    <div class="input-group input-group-sm mb-3">
+    <div class="input-group input-group-sm">
       <div class="input-group-prepend">
         <span class="input-group-text" id="inputGroup-sizing-sm"
-          >Quantity in Stock</span
+          > In Stock</span
         >
       </div>
       <input
@@ -34,8 +34,8 @@
       />
     </div>
     <div class="card-body">
-      <input type="number" min="0" [max]="productInfo.quantity" [(ngModel)]="quantitySelect" />
-      <button class="btn btn-outline-success" (click)="addToCart(productInfo)">
+      <input class="form-control-sm formtext" type="number" min="0" [max]="productInfo.quantity" [(ngModel)]="quantitySelect" />
+      <button class="btn btn-outline-dark ms-3 custombutton" (click)="addToCart(productInfo)">
         Add to Cart
       </button>
     </div>

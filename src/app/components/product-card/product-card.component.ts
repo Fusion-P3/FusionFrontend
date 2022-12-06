@@ -22,18 +22,24 @@ export class ProductCardComponent implements OnInit {
 
   @Input() productInfo!: Product;
 
-  constructor(private productService: ProductService, private auth: AuthService, private router: Router) { 
+  constructor(
+    private productService: ProductService,
+    private auth: AuthService,
+    private router: Router
+  ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
   }
 
   ngOnInit(): void {
-    this.subscription = this.productService.getCart(this.auth.userId).subscribe((cart) => {
-      this.cartCount = cart.cartCount;
-      this.products = cart.products;
-      this.totalPrice = cart.totalPrice;
-    });
+    this.subscription = this.productService
+      .getCart(this.auth.userId)
+      .subscribe((cart) => {
+        this.cartCount = cart.cartCount;
+        this.products = cart.products;
+        this.totalPrice = cart.totalPrice;
+      });
   }
 
   addToCart(product: Product): void {
@@ -48,14 +54,16 @@ export class ProductCardComponent implements OnInit {
             cartCount: this.cartCount,
             products: this.products,
             totalPrice: this.totalPrice + product.price,
-          }
+          },
         };
-        this.subscription = this.productService.setCart(cart).subscribe((cart) => {
-          this.cartCount = cart.cart.cartCount;
-          this.products = cart.cart.products;
-          this.totalPrice = cart.cart.totalPrice;
-          this.router.navigate(['cart']);
-        });
+        this.subscription = this.productService
+          .setCart(cart)
+          .subscribe((cart) => {
+            this.cartCount = cart.cart.cartCount;
+            this.products = cart.cart.products;
+            this.totalPrice = cart.cart.totalPrice;
+            this.router.navigate(['cart']);
+          });
         inCart = true;
       }
     });
@@ -72,14 +80,16 @@ export class ProductCardComponent implements OnInit {
           cartCount: this.cartCount + 1,
           products: this.products,
           totalPrice: this.totalPrice + product.price,
-        }
+        },
       };
-      this.subscription = this.productService.setCart(cart).subscribe((cart) => {
-        this.cartCount = cart.cart.cartCount;
-        this.products = cart.cart.products;
-        this.totalPrice = cart.cart.totalPrice;
-        this.router.navigate(['cart']);
-      });
+      this.subscription = this.productService
+        .setCart(cart)
+        .subscribe((cart) => {
+          this.cartCount = cart.cart.cartCount;
+          this.products = cart.cart.products;
+          this.totalPrice = cart.cart.totalPrice;
+          this.router.navigate(['cart']);
+        });
     }
   }
 
