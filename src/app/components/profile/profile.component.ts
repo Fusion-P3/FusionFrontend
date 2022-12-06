@@ -10,13 +10,14 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ProfileComponent implements OnInit {
   inventory: InventoryDTO[] = [];
+  username: string = '';
 
   constructor(
     private inventoryService: InventoryService,
     private authService: AuthService
   ) {}
   ngOnInit(): void {
-    console.log(this.authService.userId);
+    this.username = this.authService.username;
 
     this.inventoryService.getInventory(this.authService.userId).subscribe({
       next: (res) => {

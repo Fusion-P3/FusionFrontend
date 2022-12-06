@@ -17,6 +17,7 @@ export class AuthService {
   authUrl: string = `${environment.baseUrl}/auth`;
   loggedIn: boolean = false;
   userId: string = '';
+  username: string = '';
 
   constructor(private http: HttpClient) {}
 
@@ -25,6 +26,7 @@ export class AuthService {
   }
 
   logout(): void {
+    this.username = '';
     this.userId = '';
     this.loggedIn = false;
   }
