@@ -16,6 +16,8 @@ export class ProfileComponent implements OnInit {
     private authService: AuthService
   ) {}
   ngOnInit(): void {
+    console.log(this.authService.userId);
+
     this.inventoryService.getInventory(this.authService.userId).subscribe({
       next: (res) => {
         this.inventory = res;
