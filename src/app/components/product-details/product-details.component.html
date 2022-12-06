@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div class="container border border-3 rounded-4 border-white">
+<div class="container border border-3 rounded-4 border-white bg-white">
   <div class="top-info">
     <h1>{{ product.name }}</h1>
     <img class="product-image" [src]="product.image" alt="Product Image" />
@@ -7,6 +7,7 @@
   <div class="description">
     <p>{{ fullDescription }}</p>
   </div>
+  <div class="row">
   <div class="input-group input-group-sm mb-3 w-25">
     <div class="input-group-prepend">
       <span class="input-group-text" id="inputGroup-sizing-sm">$</span>
@@ -20,21 +21,21 @@
       disabled
     />
   </div>
-  <div class="input-group input-group-sm mb-3 w-25">
+  <div class="input-group input-group-sm mb-3 w-50">
     <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-sm"
-        >Quantity in Stock</span
-      >
+      <span class="input-group-text inputGroup-sizing-sm"
+        >Quantity in Stock</span>
     </div>
     <input
       type="number"
       class="form-control"
-      aria-label="Sizing example input"
+      aria-label="Sizing example "
       [value]="product.quantity"
       aria-describedby="inputGroup-sizing-sm"
       disabled
     />
   </div>
+</div>
   <div class="card-body">
     <input
       type="number"
@@ -43,7 +44,7 @@
       class="mr-3"
       [(ngModel)]="quantitySelect"
     />
-    <button class="btn btn-outline-success" (click)="addToCart(product)">
+    <button class="btn btn-outline-dark bg-white" (click)="addToCart(product)">
       Add to Cart
     </button>
   </div>

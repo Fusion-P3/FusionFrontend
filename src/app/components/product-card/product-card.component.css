@@ -1,7 +1,8 @@
 .card {
     margin: 0 auto 10px auto;
-    min-width: 204px;
-    max-width: 204px;
+    padding-top: 3px;
+    min-width: 210px;
+    max-width: 210px;
     width: 200px;
     height: fit-content;
     transition: .2s ease-out;

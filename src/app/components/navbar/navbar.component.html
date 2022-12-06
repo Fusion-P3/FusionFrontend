@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar navbar-light bg-dark">
   <h4 class="titleh4 text-white">
     <img
       src="../../../assets/images/FusionFactory-Logo-Whit-Trns.png"
@@ -10,22 +10,21 @@
   </h4>
 
   <form class="form-inline">
-    <button
-      class="btn btn-outline-warning my-2 my-sm-0"
-      [routerLink]="['/profile']"
-    >
-      Profile
+    
+
+    <button class="btn btn-light my-2 my-sm-0" [routerLink]="['/profile']">
+      Profile <span class="badge bg-success text-black">H = {{ totalHydrogen }} </span>
     </button>
 
-    <button class="btn btn-dark" [routerLink]="['/cart']">
+    <button class="btn btn-light" [routerLink]="['/cart']">
       Cart
       <span [ngSwitch]="cartCount">
         <span *ngSwitchCase="0"></span>
         <span *ngSwitchDefault
           >&nbsp;
-          <span class="badge bg-light">{{ cartCount }}</span>
-        </span></span
-      >
+          <span class="badge bg-info">{{ cartCount }}</span>
+        </span>
+      </span>
       <span [ngSwitch]="totalPrice">
         <span *ngSwitchCase="0"></span>
         <span *ngSwitchDefault
@@ -34,7 +33,7 @@
         </span></span
       >
     </button>
-    <button class="btn btn-outline-warning my-2 my-sm-0" (click)="logout()">
+    <button class="btn btn-light my-2 my-sm-0" (click)="logout()">
       Logout
     </button>
   </form>

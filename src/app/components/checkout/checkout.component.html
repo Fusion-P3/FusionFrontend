@@ -1,24 +1,16 @@
 <app-navbar></app-navbar>
-
-<div class="container mt-5 px-5">
-
-    <div class="mb-4">
-
-        <h2>Confirm Fusion</h2>
-
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-
-            <div class="mt-4 mb-4 d-flex justify-content-between">
-
-                <button class="btn btn-danger" [routerLink]="['/cart']">Back to Cart</button>
-
-                <button class="btn btn-success px-3" (click)="onSubmit();">Pay {{totalPrice}} Hydrogen</button>
-
-            </div>
-
-        </div>
-
-    </div>
+<div
+  class="container mt-5 px-5 border border-3 rounded-4 border-white bg-white"
+>
+  <div class="mb-4">
+    <h2>Confirm Fusion</h2>
+  </div>
+  <div class="mt-4 mb-4 d-flex justify-content-between">
+    <button class="btn btn-danger" [routerLink]="['/cart']">
+      Back to Cart
+    </button>
+    <button class="btn btn-success px-3" (click)="onSubmit()">
+      Pay {{ totalPrice }} Hydrogen
+    </button>
+  </div>
 </div>

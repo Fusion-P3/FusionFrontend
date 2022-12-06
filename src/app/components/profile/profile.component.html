@@ -1,19 +1,21 @@
 <app-navbar></app-navbar>
-<h1>Hello, {{ username }}!</h1>
-<table class="table table-striped" id="cart-table">
-  <caption>
-    Fusion Factory Inventory
-  </caption>
-  <thead>
-    <tr>
-      <th scope="col">Product Name</th>
-      <th scope="col">Quantity</th>
-    </tr>
-  </thead>
-  <tbody id="cart-table-body">
-    <tr *ngFor="let item of inventory">
-      <td>{{ item.productName }}</td>
-      <td>{{ item.quantity }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="container border border-3 rounded-4 border-white bg-white">
+  <h1>Hello, {{ username }}!</h1>
+  <table class="table table-striped" id="cart-table">
+    <caption class="text-black">
+      Your Inventory
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">Product Name</th>
+        <th scope="col">Quantity</th>
+      </tr>
+    </thead>
+    <tbody id="cart-table-body">
+      <tr *ngFor="let item of inventory">
+        <td>{{ item.productName }}</td>
+        <td>{{ item.quantity }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
