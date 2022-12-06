@@ -1,6 +1,5 @@
 .card {
-    margin: 0 0 30px 0;
-    /* size: auto; */
+    margin: 0 auto 10px auto;
     min-width: 204px;
     max-width: 204px;
     width: 200px;
