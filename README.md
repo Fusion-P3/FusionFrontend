@@ -48,3 +48,23 @@
 
 - Wikipedia API to get snippets about elements
 - Leetcode API for currency
+
+# Startup
+1. First you will want to clone down both REPOs from GitHub, we recommend using GitBash as your Command Line Interface to run these commands
+  * In a terminal , navigate to an area where you would like to store the Fusion Store App.
+  * Create a directory to hold both of you repos
+  * Navigate inside that directory and clone down each repo.
+  `git clone https://github.com/Fusion-P3/FusionFrontend.git`
+  `git clone https://github.com/Fusion-P3/FusionBackend.git`
+2. Prepare to launch the project in development mode
+    * In your Terminal open two windows
+     ** In both Window navigate to the directory you created to hold the Fusion Store App
+     ** In one window
+     `cd FusionBackend/`
+     `cd ECommerce.API/`
+     `dotnet run`
+      `cd ../FusionFrontend/`
+      `npm install`
+      `ng serve`
+          
+
